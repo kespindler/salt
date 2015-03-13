@@ -68,15 +68,14 @@ IS_WINDOWS_PLATFORM = sys.platform.startswith('win')
 # This ensures consistent behavior but allows for advanced usage with
 # virtualenv, buildout, and others.
 WITH_SETUPTOOLS = False
-if 'USE_SETUPTOOLS' in os.environ or 'setuptools' in sys.modules:
-    try:
-        from setuptools import setup
-        from setuptools.command.install import install
-        from setuptools.command.sdist import sdist
-        from setuptools.command.egg_info import egg_info
-        WITH_SETUPTOOLS = True
-    except ImportError:
-        WITH_SETUPTOOLS = False
+try:
+    from setuptools import setup
+    from setuptools.command.install import install
+    from setuptools.command.sdist import sdist
+    from setuptools.command.egg_info import egg_info
+    WITH_SETUPTOOLS = True
+except ImportError:
+    WITH_SETUPTOOLS = False
 
 if WITH_SETUPTOOLS is False:
     import warnings
